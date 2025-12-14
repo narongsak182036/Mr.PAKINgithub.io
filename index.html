@@ -15,6 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=TH+Sarabun+New:wght@400;700&display=swap');
+body {
+    font-family: 'TH Sarabun New', sans-serif;
+}
+
         :root {
             --primary-color: #6c5ce7;
             --secondary-color: #a29bfe;
@@ -188,7 +194,7 @@
         
         .patient-info-box {
             background: linear-gradient(135deg, #f8f9ff, #f0f2ff);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -495,17 +501,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">ชื่อ - สกุล <span class="text-danger">*</span></label>
-                                <input id="pname" class="form-control" placeholder="กรุณากรอกชื่อ-สกุลผู้ป่วย" required>
-                            </div>
                             <div class="col-md-3">
                                 <label class="form-label">HN (เลขประจำตัวผู้ป่วย)</label>
                                 <input id="hn" type="text" class="form-control" placeholder="เช่น HN001234">
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label">อายุ <span class="text-danger">*</span></label>
-                                <input id="age" type="number" class="form-control" min="0" max="120" required>
+                            <div class="col-md-6">
+                                <label class="form-label">ชื่อ - สกุล <span class="text-danger">*</span></label>
+                                <input id="pname" class="form-control" placeholder="กรุณากรอกชื่อ-สกุลผู้ป่วย" required>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">เพศ <span class="text-danger">*</span></label>
@@ -519,6 +521,10 @@
                                 <label class="form-label">เลขบัตรประชาชน</label>
                                 <input id="idCard" type="text" class="form-control" placeholder="กรอกเลขบัตรประชาชน 13 หลัก">
                             </div>
+                            <div class="col-md-3">
+                                <label class="form-label">อายุ <span class="text-danger">*</span></label>
+                                <input id="age" type="number" class="form-control" min="0" max="120" required>
+                            </div>
                             <div class="col-md-6">
                                 <label class="form-label">เบอร์โทรศัพท์</label>
                                 <input id="phone" type="tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์">
@@ -526,10 +532,6 @@
                             <div class="col-md-6">
                                 <label class="form-label">เบอร์โทรฉุกเฉิน</label>
                                 <input id="emergencyPhone" type="tel" class="form-control" placeholder="กรอกเบอร์โทรฉุกเฉิน">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">โรคประจำตัว</label>
-                                <input id="chronicDisease" type="text" class="form-control" placeholder="กรอกโรคประจำตัว (ถ้ามี)">
                             </div>
                             
                             <!-- ส่วนที่อยู่ -->
@@ -556,7 +558,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                              <div class="col-md-6">
+                                <label class="form-label">โรคประจำตัว</label>
+                                <input id="chronicDisease" type="text" class="form-control" placeholder="กรอกโรคประจำตัว (ถ้ามี)">
+                            </div>
+                              <div class="col-md-4">
+                                <label class="form-label">BP (ความดันโลหิต)</label>
+                                <input id="bloodPressure" type="text" class="form-control" placeholder="เช่น 120/80 mmHg">
+                            </div>
+                               <div class="col-md-3">
+                                <label class="form-label">ชีพจร (P)</label>
+                                <input id="pulse" type="number" class="form-control" placeholder="เช่น 72">
+                            </div>
                             <div class="col-md-4">
                                 <label class="form-label">แพ้ยา</label>
                                 <input id="drugAllergy" type="text" class="form-control" placeholder="กรอกยาที่แพ้ (ถ้ามี)">
@@ -565,16 +578,10 @@
                                 <label class="form-label">แพ้อาหาร</label>
                                 <input id="foodAllergy" type="text" class="form-control" placeholder="กรอกอาหารที่แพ้ (ถ้ามี)">
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">BP (ความดันโลหิต)</label>
-                                <input id="bloodPressure" type="text" class="form-control" placeholder="เช่น 120/80 mmHg">
-                            </div>
+                          
+                         
                             <div class="col-md-3">
-                                <label class="form-label">ชีพจร (P)</label>
-                                <input id="pulse" type="number" class="form-control" placeholder="เช่น 72">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">ออกซิเจนในเลือด (SpO2)</label>
+                                <label class="form-label"> (SpO2)</label>
                                 <input id="spo2" type="number" class="form-control" placeholder="เช่น 98" min="0" max="100">
                             </div>
                             <div class="col-md-3">
@@ -668,16 +675,19 @@
                                 <div class="mb-3">
                                     <label class="form-label">ลักษณะลิ้น (เลือกได้หลายข้อ)</label>
                                     <div id="tongueChips" class="d-flex flex-wrap">
-                                        <span class="chip" data-val="สีแดง">สีแดง</span>
-                                        <span class="chip" data-val="ซีด">สีซีด</span>
-                                        <span class="chip" data-val="สีม่วงคล้ำ">สีม่วงคล้ำ</span>
-                                        <span class="chip" data-val="ฝ้าขาว">ฝ้าขาว</span>
-                                        <span class="chip" data-val="ฝ้าบาง">ฝ้าบาง</span>
-                                        <span class="chip" data-val="ฝ้าเเห้ง">ฝ้าเเห้ง กระด้าง</span>
-                                        <span class="chip" data-val="ฝ้าเหลือง">ฝ้าเหลือง</span>
-                                        <span class="chip" data-val="ลิ้นมีจุดแดง">ลิ้นมีจุดแดง</span>
-                                        <span class="chip" data-val="ลิ้นบวมใหญ่">ลิ้นบวมใหญ่</span>
-                                        <span class="chip" data-val="ลิ้นมีรอยพิมพ์ฟัน">ลิ้นมีรอยพิมพ์ฟัน</span>
+                                        <span class="chip" data-val="红舌">红舌</span>
+                                        <span class="chip" data-val="红绛舌">红绛舌</span>
+                                        <span class="chip" data-val="淡白舌">淡白舌</span>
+                                        <span class="chip" data-val="青紫舌">青紫舌</span>
+                                        <span class="chip" data-val="胖大舌">胖大舌</span>
+                                        <span class="chip" data-val="裂纹舌">裂纹舌</span>
+                                        <span class="chip" data-val="齿痕舌">齿痕舌</span>
+                                        <span class="chip" data-val="点剌舌">点剌舌</span>
+                                        <span class="chip" data-val="腻苔">腻苔</span>
+                                        <span class="chip" data-val="厚苔">厚苔</span>
+                                        <span class="chip" data-val="薄苔">薄苔</span>
+                                        <span class="chip" data-val="白苔">白苔</span>
+                                        <span class="chip" data-val="黄色苔">黄色苔</span>
                                         <span class="chip" data-val="ปลายลิ้นเเดง">ปลายลิ้นเเดง</span>
                                     </div>
                                 </div>
@@ -687,11 +697,20 @@
                                     <label class="form-label">ชีพจรแพทย์แผนจีน (เลือกได้หลายข้อ)</label>
                                     <div id="pulseChips" class="d-flex flex-wrap">
                                         <span class="chip" data-val="ปกติ">ปกติ</span>
-                                        <span class="chip" data-val="ลื่น 滑脉">ลื่น 滑脉</span>
-                                        <span class="chip" data-val="ตึง 弦脉">ตึง 弦脉</span>
-                                        <span class="chip" data-val="จม 沉脉">จม 沉脉</span>
-                                        <span class="chip" data-val="ลอย 浮脉">ลอย 浮脉</span>
-                                        <span class="chip" data-val="ฝืด ติดขัด">ฝืด ติดขัด</span>
+                                        <span class="chip" data-val="数脉">数脉</span>
+                                        <span class="chip" data-val="迟脉">迟脉</span>
+                                        <span class="chip" data-val="缓脉">缓脉</span>
+                                        <span class="chip" data-val="浮脉">浮脉</span>
+                                        <span class="chip" data-val="沉脉">沉脉</span>
+                                        <span class="chip" data-val="滑脉">滑脉</span>
+                                        <span class="chip" data-val="涩脉">涩脉</span>
+                                        <span class="chip" data-val="弦脉">弦脉</span>
+                                        <span class="chip" data-val="洪脉">洪脉</span>
+                                        <span class="chip" data-val="细脉">细脉</span>
+                                        <span class="chip" data-val="弱脉">弱脉</span>
+                                        <span class="chip" data-val="紧脉">紧脉</span>
+                                        <span class="chip" data-val="结脉">结脉</span>
+                                        <span class="chip" data-val="代脉">代脉</span>
                                         <span class="chip" data-val="อื่นๆ">อื่นๆ</span>
                                     </div>
                                     <input id="otherPulse" type="text" class="form-control mt-2" placeholder="ระบุชีพจรอื่นๆ" style="display: none;">
@@ -712,6 +731,38 @@
                     </div>
                 </div>
 
+
+                 <!-- แผนการรักษา -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-prescription me-2"></i> แผนการรักษา
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">แผนการรักษา / คำแนะนำ</label>
+                            <textarea id="plan" class="form-control" rows="3" placeholder="ให้คำแนะนำการรักษา การดูแลตนเอง หรือข้อควรปฏิบัติ"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">ยาสมุนไพรที่แนะนำ</label>
+                            <textarea id="herbRecommendation" class="form-control" rows="2" placeholder="เช่น แนะนำให้รับประทานสมุนไพร..."></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">จำนวนวันรักษา</label>
+                                <div class="input-group">
+                                    <input id="treatmentDays" type="number" class="form-control" min="1" value="7">
+                                    <span class="input-group-text">วัน</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">หมายเหตุเพิ่มเติม</label>
+                                <input id="additionalNote" class="form-control" placeholder="หมายเหตุเพิ่มเติม">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- บริการและค่าใช้จ่าย -->
                 <div class="card mb-4">
                     <div class="card-header">
@@ -735,7 +786,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="service-chip" data-service="ครอบแก้ว" data-price="500">
-                                        <div>ครอบแก้ว</div>
+                                        <div>ตรวจ + ครอบแก้ว</div>
                                         <span class="service-price">500 บาท</span>
                                     </div>
                                 </div>
@@ -747,33 +798,19 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="service-chip" data-service="นวดกดจุด" data-price="400">
-                                        <div>นวดกดจุด</div>
-                                        <span class="service-price">400 บาท</span>
+                                        <div>ตรวจ + นวดกดจุด ทุยหนา</div>
+                                        <span class="service-price">600 บาท</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="service-chip" data-service="ตรวจทั่วไป" data-price="300">
-                                        <div>ตรวจทั่วไป</div>
+                                        <div>ตรวจทั่วไป (เเมะ)</div>
                                         <span class="service-price">300 บาท</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">บริการอื่นๆ</label>
-                                    <div class="input-group">
-                                        <input id="otherService" class="form-control" placeholder="กรอกบริการอื่นๆ" oninput="updateCustomService()">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">ราคาบริการอื่นๆ</label>
-                                    <div class="input-group">
-                                        <input id="otherPrice" type="number" class="form-control" min="0" value="0" oninput="updateCustomService()">
-                                        <span class="input-group-text">บาท</span>
-                                    </div>
-                                </div>
-                            </div>
+                           
                             
                             <!-- ส่วนลด -->
                             <div class="discount-container">
@@ -819,39 +856,7 @@
                             </div>
                             <div class="receipt-total">
                                 <span>รวมทั้งสิ้น</span>
-                                <span id="totalCost">0 บาท</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- แผนการรักษา -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="bi bi-prescription me-2"></i> แผนการรักษา
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">แผนการรักษา / คำแนะนำ</label>
-                            <textarea id="plan" class="form-control" rows="3" placeholder="ให้คำแนะนำการรักษา การดูแลตนเอง หรือข้อควรปฏิบัติ"></textarea>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">ยาสมุนไพรที่แนะนำ</label>
-                            <textarea id="herbRecommendation" class="form-control" rows="2" placeholder="เช่น แนะนำให้รับประทานสมุนไพร..."></textarea>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-label">จำนวนวันรักษา</label>
-                                <div class="input-group">
-                                    <input id="treatmentDays" type="number" class="form-control" min="1" value="7">
-                                    <span class="input-group-text">วัน</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">หมายเหตุเพิ่มเติม</label>
-                                <input id="additionalNote" class="form-control" placeholder="หมายเหตุเพิ่มเติม">
+                                <span id="totalCost">0 บาท
                             </div>
                         </div>
                     </div>
@@ -916,7 +921,7 @@
                             <select id="appointType" class="form-select">
                                 <option value="ตรวจติดตาม">ตรวจติดตาม</option>
                                 <option value="ฝังเข็ม">ฝังเข็ม</option>
-                                <option value="นวดกดจุด">นวดกดจุด</option>
+                                <option value="นวดกดจุด">นวดทุยหนา</option>
                                 <option value="ครอบแก้ว">ครอบแก้ว</option>
                                 <option value="รับยา">รับยา</option>
                                 <option value="อื่นๆ">อื่นๆ</option>
@@ -994,9 +999,9 @@
                     <div class="col-md-3">
                         <select id="doctorSelect" class="form-select" onchange="updatePerformanceReport()">
                             <option value="all">แพทย์ทั้งหมด</option>
-                            <option value="dr1">แพทย์หญิง สุนิสา</option>
-                            <option value="dr2">แพทย์ชาย อนุชา</option>
-                            <option value="dr3">แพทย์หญิง ปิยนุช</option>
+                            <option value="dr1">แพทย์จีน ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย</option>
+                            <option value="dr2">แพทย์จีน สาคร เเง้นกลางดอน</option>
+                            <option value="dr3">แพทย์จีน กิ่งเเก้ว</option>
                         </select>
                     </div>
                 </div>
@@ -2697,185 +2702,302 @@
             }
         }
 
-        // ส่งออกเป็น PDF (บันทึกการตรวจ) - มีเพิ่มรูปภาพ
-        function exportOPDToPDF() {
-            const patientName = document.getElementById('pname').value.trim();
-            if (!patientName) {
-                alert('กรุณากรอกชื่อผู้ป่วยก่อนส่งออก PDF');
-                return;
-            }
-            
-            try {
-                const tongueImage = document.getElementById('tongue-image-data').value;
-                const faceImage = document.getElementById('face-image-data').value;
-                const tongue = getSelectedTongue().join(', ');
-                const pulseTCM = getSelectedPulse().join(', ');
-                const servicesList = selectedServices.map(s => `${s.service} (${s.price} บาท)`).join(', ');
-                const hn = document.getElementById('hn').value.trim();
-                const hnDisplay = hn ? `HN: ${hn}` : '';
-                
-                // รวบรวมที่อยู่
-                const addressParts = [
-                    document.getElementById('address').value,
-                    document.getElementById('road').value,
-                    document.getElementById('subdistrict').value,
-                    document.getElementById('district').value,
-                    document.getElementById('province').value,
-                    document.getElementById('zipcode').value
-                ].filter(part => part.trim() !== '');
-                const fullAddress = addressParts.join(' ');
-                
-                const element = document.createElement('div');
-                element.innerHTML = `
-                    <div style="font-family: 'Sarabun', sans-serif; padding: 20px;">
-                        <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 15px;">
-                            <h2 style="color: #6c5ce7; margin-bottom: 5px;">บันทึกการตรวจ OPD แพทย์แผนจีน</h2>
-                            <p style="color: #777;">${document.getElementById('visitDate').value} ${document.getElementById('visitTime').value || ''}</p>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px;">
-                            <div style="flex: 1;">
-                                <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">ข้อมูลผู้ป่วย</h4>
-                                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                                    <tr>
-                                        <td style="width: 30%; padding: 8px 0; vertical-align: top;"><strong>ชื่อ-สกุล:</strong></td>
-                                        <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('pname').value || '-'} ${hnDisplay}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px 0; vertical-align: top;"><strong>อายุ/เพศ:</strong></td>
-                                        <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('age').value || '-'} ปี / ${document.getElementById('gender').value || '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px 0; vertical-align: top;"><strong>เลขบัตรประชาชน:</strong></td>
-                                        <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('idCard').value || '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px 0; vertical-align: top;"><strong>โทรศัพท์:</strong></td>
-                                        <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('phone').value || '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px 0; vertical-align: top;"><strong>ที่อยู่:</strong></td>
-                                        <td style="padding: 8px 0; vertical-align: top;">${fullAddress || '-'}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="width: 150px; margin-left: 20px;">
-                                ${faceImage ? `
-                                    <img src="${faceImage}" style="width: 120px; height: 150px; object-fit: cover; border: 2px solid #ddd; border-radius: 8px; margin: 10px;">
-                                    <p style="text-align: center; font-size: 12px; color: #555;">รูปหน้าผู้ป่วย</p>
-                                ` : `
-                                    <div style="width: 120px; height: 150px; border: 2px dashed #ddd; border-radius: 8px; margin: 10px; display: flex; align-items: center; justify-content: center; color: #999;">
-                                        ไม่มีรูปภาพ
-                                    </div>
-                                `}
-                            </div>
-                        </div>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">อาการและการวินิจฉัย</h4>
-                            <p><strong>อาการสำคัญ(主诉):</strong> ${document.getElementById('symptom').value || '-'}</p>
-                            <p><strong>ประวัติที่เกี่ยวข้อง(现病史):</strong> ${document.getElementById('history').value || '-'}</p>
-                            <p><strong>ลักษณะลิ้น:</strong> ${tongue || '-'}</p>
-                            <p><strong>ชีพจร(แพทย์แผนจีน):</strong> ${pulseTCM || '-'}</p>
-                            <p><strong>วินิจฉัย TCM:</strong> ${document.getElementById('tcmDiag').value || '-'}</p>
-                            <p><strong>วินิจฉัยสากล:</strong> ${document.getElementById('westDiag').value || '-'}</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">บริการและค่าใช้จ่าย</h4>
-                            <p><strong>บริการที่ได้รับ:</strong> ${servicesList || '-'}</p>
-                            ${discountAmount > 0 ? `<p><strong>ส่วนลด:</strong> ${discountAmount.toFixed(2)} บาท</p>` : ''}
-                            <p><strong>รวมค่าใช้จ่าย:</strong> ${totalCost.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2})} บาท</p>
-                        </div>
-                        
-                        ${tongueImage || faceImage ? `
-                        <div style="margin-bottom: 25px;">
-                            <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">รูปภาพประกอบการตรวจ</h4>
-                            <div class="pdf-images-container">
-                                ${tongueImage ? `
-                                <div class="pdf-image-item">
-                                    <img src="${tongueImage}" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 8px;">
-                                    <div class="pdf-image-label">รูปลิ้นผู้ป่วย</div>
-                                </div>
-                                ` : ''}
-                                ${faceImage ? `
-                                <div class="pdf-image-item">
-                                    <img src="${faceImage}" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 8px;">
-                                    <div class="pdf-image-label">รูปหน้าผู้ป่วย</div>
-                                </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                        ` : ''}
-                        
-                        <div style="margin-bottom: 25px;">
-                            <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">แผนการรักษา</h4>
-                            <p><strong>แผนการรักษา/คำแนะนำ:</strong> ${document.getElementById('plan').value || '-'}</p>
-                            <p><strong>ยาสมุนไพรที่แนะนำ:</strong> ${document.getElementById('herbRecommendation').value || '-'}</p>
-                            <p><strong>จำนวนวันรักษา:</strong> ${document.getElementById('treatmentDays').value || 0} วัน</p>
-                            <p><strong>หมายเหตุ:</strong> ${document.getElementById('additionalNote').value || '-'}</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <h4 style="color: #6c5ce7; border-bottom: 1px solid #eee; padding-bottom: 8px;">ชีพจรและสัญญาณชีพ</h4>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                                <tr>
-                                    <td style="width: 25%; padding: 8px 0; vertical-align: top;"><strong>BP (ความดันโลหิต):</strong></td>
-                                    <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('bloodPressure').value || '-'}</td>
-                                    <td style="width: 25%; padding: 8px 0; vertical-align: top;"><strong>ชีพจร (P):</strong></td>
-                                    <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('pulse').value || '-'}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px 0; vertical-align: top;"><strong>ออกซิเจนในเลือด (SpO2):</strong></td>
-                                    <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('spo2').value || '-'}</td>
-                                    <td style="padding: 8px 0; vertical-align: top;"><strong>อุณหภูมิ (Temp):</strong></td>
-                                    <td style="padding: 8px 0; vertical-align: top;">${document.getElementById('temperature').value || '-'}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px 0; vertical-align: top;"><strong>น้ำหนัก (Weight):</strong></td>
-                                    <td style="padding: 8px 0; vertical-align: top;" colspan="3">${document.getElementById('weight').value || '-'} กก.</td>
-                                </tr>
-                            </table>
-                        </div>
-                        
-                        <div style="margin-top: 50px; border-top: 1px solid #333; padding-top: 15px;">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width: 50%; text-align: center;">
-                                        <p>_________________________________</p>
-                                        <p>ลายเซ็นแพทย์</p>
-                                        <p>วันที่: ${new Date().toLocaleDateString('th-TH')}</p>
-                                    </td>
-                                    <td style="width: 50%; text-align: center;">
-                                        <p>_________________________________</p>
-                                        <p>ลายเซ็นผู้ป่วย/ผู้ปกครอง</p>
-                                        <p>วันที่: ${new Date().toLocaleDateString('th-TH')}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+    function exportOPDToPDF() {
+    const patientName = document.getElementById('pname').value.trim();
+    if (!patientName) {
+        alert('กรุณากรอกชื่อผู้ป่วยก่อนส่งออก PDF');
+        return;
+    }
+    
+    try {
+        const tongueImage = document.getElementById('tongue-image-data').value;
+        const faceImage = document.getElementById('face-image-data').value;
+        const tongue = getSelectedTongue().join(', ');
+        const pulseTCM = getSelectedPulse().join(', ');
+        const hn = document.getElementById('hn').value.trim();
+        
+        // รวบรวมที่อยู่แบบกระชับ
+        const addressParts = [
+            document.getElementById('address').value,
+            document.getElementById('road').value,
+            document.getElementById('subdistrict').value,
+            document.getElementById('district').value,
+            document.getElementById('province').value
+        ].filter(part => part.trim() !== '');
+        const fullAddress = addressParts.join(' ');
+        
+        const element = document.createElement('div');
+        element.innerHTML = `
+            <div style="font-family: 'TH Sarabun New', 'Sarabun', sans-serif; padding: 15mm 20mm; line-height: 1.2; color: #000000; font-size: 11pt;">
+                <!-- Hospital Header -->
+                <div style="text-align: center; margin-bottom: 8mm; border-bottom: 0.5pt solid #000000; padding-bottom: 3mm;">
+                    <div style="text-align: center;">
+                        <h1 style="margin: 0; font-size: 18pt; font-weight: bold; letter-spacing: 0.5pt;">บันทึกการตรวจโรคนอกผู้ป่วย</h1>
+                        <h2 style="margin: 1mm 0; font-size: 14pt; font-weight: normal;">แผนกแพทย์แผนจีน (Traditional Chinese Medicine OPD)</h2>
+                        <p style="margin: 0; font-size: 10pt;">เอกสารบันทึกเวชระเบียนทางการแพทย์</p>
                     </div>
-                `;
+                </div>
                 
-                const opt = {
-                    margin: 10,
-                    filename: `OPD_TCM_${patientName}_${new Date().toISOString().slice(0,10)}.pdf`,
-                    image: { type: 'jpeg', quality: 0.8 },
-                    html2canvas: { 
-                        scale: 2,
-                        useCORS: true,
-                        allowTaint: false
-                    },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
+                <!-- Patient Information Section -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td colspan="4" style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>ข้อมูลผู้ป่วย | Patient Information</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 15%; padding: 1.5mm 0; vertical-align: top;"><strong>HN:</strong></td>
+                        <td style="width: 35%; padding: 1.5mm 0;">${hn || '-'}</td>
+                        <td style="width: 50%; padding: 1.5mm 0; text-align: right;" rowspan="4">
+                            ${faceImage ? `
+                                <div style="display: inline-block; border: 0.5pt solid #000000; padding: 1mm;">
+                                    <img src="${faceImage}" style="width: 25mm; height: 30mm; object-fit: cover; display: block;">
+                                    <p style="margin: 1mm 0 0 0; text-align: center; font-size: 9pt;">รูปหน้าผู้ป่วย</p>
+                                </div>
+                            ` : `
+                                <div style="display: inline-block; border: 0.5pt solid #000000; width: 25mm; height: 32mm; padding: 1mm; text-align: center;">
+                                    <div style="height: 30mm; display: flex; align-items: center; justify-content: center; border: 0.5pt dashed #999;">
+                                        <span style="font-size: 9pt; color: #666;">ไม่มีรูปภาพ</span>
+                                    </div>
+                                    <p style="margin: 1mm 0 0 0; text-align: center; font-size: 9pt;">รูปหน้าผู้ป่วย</p>
+                                </div>
+                            `}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>ชื่อ-สกุล:</strong></td>
+                        <td style="padding: 1.5mm 0;">${document.getElementById('pname').value || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>อายุ/เพศ:</strong></td>
+                        <td style="padding: 1.5mm 0;">${document.getElementById('age').value || '-'} ปี / ${document.getElementById('gender').value || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>เลขประจำตัว:</strong></td>
+                        <td style="padding: 1.5mm 0;">${document.getElementById('idCard').value || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>ที่อยู่:</strong></td>
+                        <td colspan="3" style="padding: 1.5mm 0;">${fullAddress || '-'} ${document.getElementById('zipcode').value ? 'รหัส ' + document.getElementById('zipcode').value : ''}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>โทรศัพท์:</strong></td>
+                        <td colspan="3" style="padding: 1.5mm 0;">${document.getElementById('phone').value || '-'}</td>
+                    </tr>
+                </table>
                 
-                html2pdf().set(opt).from(element).save();
-            } catch (error) {
-                console.error('PDF export error:', error);
-                alert('เกิดข้อผิดพลาดในการสร้าง PDF: ' + error.message);
+                <!-- Visit Information -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td colspan="4" style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>ข้อมูลการตรวจ | Visit Information</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 1.5mm 0;"><strong>วันที่ตรวจ:</strong></td>
+                        <td style="width: 30%; padding: 1.5mm 0;">${document.getElementById('visitDate').value || '-'}</td>
+                        <td style="width: 20%; padding: 1.5mm 0;"><strong>เวลา:</strong></td>
+                        <td style="width: 30%; padding: 1.5mm 0;">${document.getElementById('visitTime').value || '-'}</td>
+                    </tr>
+                </table>
+                
+                <!-- Vital Signs -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td colspan="6" style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>สัญญาณชีพ | Vital Signs</strong>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td style="width: 20%; padding: 1.5mm 0; border: 0.5pt solid #000000;"><strong>ความดันโลหิต</strong><br>BP (mmHg)</td>
+                        <td style="width: 20%; padding: 1.5mm 0; border: 0.5pt solid #000000;"><strong>ชีพจร</strong><br>Pulse (bpm)</td>
+                        <td style="width: 20%; padding: 1.5mm 0; border: 0.5pt solid #000000;"><strong>ออกซิเจน</strong><br>SpO₂ (%)</td>
+                        <td style="width: 20%; padding: 1.5mm 0; border: 0.5pt solid #000000;"><strong>อุณหภูมิ</strong><br>Temp (°C)</td>
+                        <td style="width: 20%; padding: 1.5mm 0; border: 0.5pt solid #000000;"><strong>น้ำหนัก</strong><br>Weight (kg)</td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td style="padding: 1.5mm 0; border: 0.5pt solid #000000;">${document.getElementById('bloodPressure').value || '-'}</td>
+                        <td style="padding: 1.5mm 0; border: 0.5pt solid #000000;">${document.getElementById('pulse').value || '-'}</td>
+                        <td style="padding: 1.5mm 0; border: 0.5pt solid #000000;">${document.getElementById('spo2').value || '-'}</td>
+                        <td style="padding: 1.5mm 0; border: 0.5pt solid #000000;">${document.getElementById('temperature').value || '-'}</td>
+                        <td style="padding: 1.5mm 0; border: 0.5pt solid #000000;">${document.getElementById('weight').value || '-'}</td>
+                    </tr>
+                </table>
+                
+                <!-- TCM Examination -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td colspan="2" style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>การตรวจร่างกายแพทย์แผนจีน | TCM Examination</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%; padding: 1.5mm 0; vertical-align: top;"><strong>อาการสำคัญ:</strong></td>
+                        <td style="padding: 1.5mm 0; vertical-align: top;">${document.getElementById('symptom').value || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0; vertical-align: top;"><strong>ประวัติ:</strong></td>
+                        <td style="padding: 1.5mm 0; vertical-align: top;">${document.getElementById('history').value || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>ลักษณะลิ้น:</strong></td>
+                        <td style="padding: 1.5mm 0;">${tongue || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;"><strong>ชีพจรแพทย์แผนจีน:</strong></td>
+                        <td style="padding: 1.5mm 0;">${pulseTCM || '-'}</td>
+                    </tr>
+                </table>
+                
+                <!-- Tongue Image Section -->
+                ${tongueImage ? `
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>รูปภาพประกอบการตรวจ | Examination Images</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0; text-align: center;">
+                            <div style="display: inline-block; border: 0.5pt solid #000000; padding: 2mm;">
+                                <img src="${tongueImage}" style="width: 40mm; height: 25mm; object-fit: cover; display: block;">
+                                <p style="margin: 1mm 0 0 0; text-align: center; font-size: 9pt;">รูปลิ้นผู้ป่วย</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                ` : ''}
+                
+                <!-- Diagnosis Section -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 11pt;">
+                    <tr>
+                        <td colspan="2" style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>การวินิจฉัย | Diagnosis</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; padding: 1.5mm 0; vertical-align: top; border-right: 0.5pt solid #000000;">
+                            <strong>แพทย์แผนจีน (TCM):</strong><br>
+                            ${document.getElementById('tcmDiag').value || 'ไม่ระบุ'}
+                        </td>
+                        <td style="width: 50%; padding: 1.5mm 0; vertical-align: top; padding-left: 2mm;">
+                            <strong>การวินิจฉัยสากล:</strong><br>
+                            ${document.getElementById('westDiag').value || 'ไม่ระบุ'}
+                        </td>
+                    </tr>
+                </table>
+                
+                <!-- Treatment Plan -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 10mm; font-size: 11pt;">
+                    <tr>
+                        <td style="padding: 2mm 0; border-bottom: 0.5pt solid #000000;">
+                            <strong>แผนการรักษา | Treatment Plan</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0; vertical-align: top;">
+                            <strong>แผนการรักษา:</strong> ${document.getElementById('plan').value || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0; vertical-align: top;">
+                            <strong>ยาสมุนไพร:</strong> ${document.getElementById('herbRecommendation').value || '-'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0;">
+                            <strong>จำนวนวันรักษา:</strong> ${document.getElementById('treatmentDays').value || 0} วัน
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1.5mm 0; vertical-align: top;">
+                            <strong>หมายเหตุ:</strong> ${document.getElementById('additionalNote').value || '-'}
+                        </td>
+                    </tr>
+                </table>
+                
+                <!-- Signature and Footer -->
+                <div style="margin-top: 10mm;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11pt;">
+                        <tr>
+                            <td style="width: 60%; padding: 0 5mm 8mm 0; vertical-align: bottom;">
+                                <div style="text-align: center;">
+                                    <div style="border-bottom: 0.5pt solid #000000; width: 60mm; height: 12mm; margin: 0 auto 2mm auto; position: relative;">
+                                        <div style="position: absolute; bottom: -8mm; left: 0; right: 0;">
+                                            <p style="margin: 0; text-align: center;">ลายเซ็นแพทย์ผู้ตรวจ</p>
+                                            <p style="margin: 1mm 0 0 0; text-align: center; font-weight: bold;">
+                                                แพทย์แผนจีน พจ.979 ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย
+                                            </p>
+                                            <p style="margin: 0.5mm 0 0 0; text-align: center; font-size: 10pt;">
+                                                Licensed Traditional Chinese Medicine Practitioner
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width: 40%; vertical-align: bottom; padding-left: 5mm;">
+                                <div style="text-align: center;">
+                                    <p style="margin: 0;"><strong>วันที่</strong></p>
+                                    <div style="border-bottom: 0.5pt solid #000000; width: 40mm; margin: 2mm auto; padding-bottom: 2mm;">
+                                        ${new Date().toLocaleDateString('th-TH', { 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        })}
+                                    </div>
+                                    <p style="margin: 0; font-size: 10pt;">(วัน/เดือน/ปี)</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Document Footer -->
+                    <div style="margin-top: 5mm; padding-top: 2mm; border-top: 0.5pt solid #000000; text-align: center;">
+                        <p style="margin: 0; font-size: 9pt; color: #333;">
+                            เอกสารนี้เป็นส่วนหนึ่งของเวชระเบียนทางการแพทย์ ห้ามทำซ้ำหรือเผยแพร่โดยไม่ได้รับอนุญาต
+                        </p>
+                        <p style="margin: 1mm 0 0 0; font-size: 8pt; color: #666;">
+                            TCM OPD Record - Document ID: ${new Date().getTime()} | Generated on: ${new Date().toLocaleString('th-TH')}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const opt = {
+            margin: [15, 15, 15, 15],
+            filename: `OPD_TCM_${patientName.replace(/\s+/g, '_')}_${hn || 'NO_HN'}_${new Date().toISOString().slice(0,10)}.pdf`,
+            image: { 
+                type: 'jpeg', 
+                quality: 0.95,
+                compression: 'MEDIUM'
+            },
+            html2canvas: { 
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                logging: false,
+                letterRendering: true,
+                width: 794,
+                height: 1123,
+                backgroundColor: '#FFFFFF'
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait',
+                compress: true,
+                hotfixes: ["px_scaling"]
             }
-        }
-
+        };
+        
+        html2pdf().set(opt).from(element).save();
+        
+    } catch (error) {
+        console.error('PDF export error:', error);
+        alert('เกิดข้อผิดพลาดในการสร้าง PDF: ' + error.message);
+    }
+}
         // ค้นหาประวัติ
         function searchRecords() {
             const query = document.getElementById('searchBox').value.toLowerCase().trim();
