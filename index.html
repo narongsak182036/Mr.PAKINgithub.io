@@ -3184,183 +3184,197 @@ function generateMedicalCertContent() {
     `;
 }
 
-        // สร้างเนื้อหาใบรับรองแพทย์ (ครึ่งหน้า - แบบกระชับ)
-        function generateMedicalCertContentHalfPage() {
-            const patientName = document.getElementById('pname').value.trim();
-            const age = document.getElementById('age').value;
-            const gender = document.getElementById('gender').value;
-            const visitDate = document.getElementById('visitDate').value;
-            const tcmDiag = document.getElementById('tcmDiag').value;
+       // สร้างเนื้อหาใบรับรองแพทย์ (ครึ่งหน้า - แบบกระชับ)
+function generateMedicalCertContentHalfPage() {
+    const patientName = document.getElementById('pname').value.trim();
+    const age = document.getElementById('age').value;
+    const gender = document.getElementById('gender').value;
+    const visitDate = document.getElementById('visitDate').value;
+    const tcmDiag = document.getElementById('tcmDiag').value;
+    
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('th-TH', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    
+    // กำหนดค่าเริ่มต้นถ้าช่องว่าง
+    const displayVisitDate = visitDate ? 
+        new Date(visitDate).toLocaleDateString('th-TH', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        }) : formattedDate;
+    
+    return `
+        <div style="font-family: 'TH Sarabun New', 'Sarabun', sans-serif; padding: 5mm 8mm; line-height: 1.2; color: #000000; font-size: 11pt; height: 148.5mm; box-sizing: border-box; page-break-inside: avoid;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 3mm; padding-bottom: 1mm; border-bottom: 0.5pt solid #000;">
+                <h2 style="margin: 0 0 1mm 0; font-size: 14pt; font-weight: bold;">ใบรับรองแพทย์</h2>
+                <h3 style="margin: 0; font-size: 12pt; font-weight: bold;">${clinicInfo.nameShort || clinicInfo.name}</h3>
+                <p style="margin: 1mm 0 0 0; font-size: 9pt;">
+                    ${clinicInfo.addressThai || ''}<br>
+                    ${clinicInfo.phone || ''}
+                </p>
+            </div>
             
-            const today = new Date();
-            const formattedDate = today.toLocaleDateString('th-TH', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-            
-            return `
-                <div class="half-page-pdf" style="font-family: 'TH Sarabun New', 'Sarabun', sans-serif; padding: 8mm; line-height: 1.3; color: #000000; font-size: 12pt; border: 1px solid #999;">
-                    <!-- Header -->
-                    <div style="text-align: center; margin-bottom: 5mm;">
-                        <h2 style="margin: 0; font-size: 16pt; font-weight: bold;">ใบรับรองแพทย์</h2>
-                        <h3 style="margin: 2px 0; font-size: 14pt;">${clinicInfo.nameShort}</h3>
-                    </div>
-                    
-                    <!-- เนื้อหา -->
-                    <div style="margin: 3mm 0;">
-                        <p style="margin: 2mm 0; text-align: justify;">
-                            ข้าพเจ้า <strong>แพทย์แผนจีน ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย</strong>
-                            ขอรับรองว่า
-                        </p>
-                        
-                        <div style="margin: 3mm 0; padding-left: 5mm;">
-                            <p style="margin: 1.5mm 0;"><strong>ชื่อ:</strong> ${patientName || '....................'}</p>
-                            <p style="margin: 1.5mm 0;">
-                                <strong>อายุ:</strong> ${age || '..'} ปี &nbsp;&nbsp;
-                                <strong>เพศ:</strong> ${gender || '..'}
-                            </p>
-                            <p style="margin: 1.5mm 0;">
-                                <strong>วันที่ตรวจ:</strong> ${visitDate ? new Date(visitDate).toLocaleDateString('th-TH') : formattedDate}
-                            </p>
-                        </div>
-                        
-                        <p style="margin: 2mm 0; text-align: justify;">
-                            ได้รับการตรวจรักษาทางการแพทย์แผนจีน
-                            ${tcmDiag ? `ด้วยภาวะ "${tcmDiag}"` : 'ตามอาการที่มี'} 
-                            และให้คำแนะนำในการดูแลสุขภาพตามหลักการแพทย์แผนจีน
-                        </p>
-                        
-                        <p style="margin: 2mm 0; text-align: justify;">
-                            ออกใบรับรองนี้ไว้เพื่อเป็นหลักฐานตามความประสงค์
-                        </p>
-                    </div>
-                    
-                    <!-- ลายเซ็น -->
-                    <div style="margin-top: 8mm;">
-                        <div style="text-align: center;">
-                            <p style="margin: 8mm 0 1mm 0;">
-                                ลงชื่อ...........................................................
-                            </p>
-                            <p style="margin: 0; font-size: 10pt;">
-                                (แพทย์แผนจีน ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย)
-                            </p>
-                            <p style="margin: 1mm 0; font-size: 9pt;">
-                                วันที่ ${formattedDate}
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Footer -->
-                    <div style="margin-top: 3mm; padding-top: 2mm; border-top: 0.5pt solid #ccc; font-size: 8pt; text-align: center; color: #666;">
-                        <p style="margin: 1px 0;">${clinicInfo.addressThai}</p>
-                        <p style="margin: 1px 0;">${clinicInfo.phone}</p>
-                    </div>
+            <!-- เนื้อหา -->
+            <div style="margin: 3mm 0;">
+                <p style="margin: 2mm 0; text-align: justify; text-indent: 12mm;">
+                    ข้าพเจ้า <strong>แพทย์แผนจีน ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย</strong>
+                    ขอรับรองว่า
+                </p>
+                
+                <div style="margin: 3mm 0 4mm 0; padding-left: 15mm;">
+                    <p style="margin: 1.5mm 0; padding: 0.5mm 0;">
+                        <strong>ชื่อ-สกุล:</strong> ${patientName || '.........................................'}
+                    </p>
+                    <p style="margin: 1.5mm 0; padding: 0.5mm 0;">
+                        <strong>อายุ:</strong> ${age || '......'} ปี &nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>เพศ:</strong> ${gender || '......'}
+                    </p>
+                    <p style="margin: 1.5mm 0; padding: 0.5mm 0;">
+                        <strong>วันที่เข้ารับการตรวจ:</strong> ${displayVisitDate}
+                    </p>
                 </div>
-            `;
-        }
-
+                
+                <p style="margin: 2mm 0; text-align: justify; text-indent: 12mm;">
+                    ได้รับการตรวจรักษาทางการแพทย์แผนจีน
+                    ${tcmDiag ? `ด้วยภาวะ "<strong>${tcmDiag}</strong>" ตามหลักการแพทย์แผนจีน` : 'ตามอาการที่มี'} 
+                    และให้คำแนะนำในการดูแลสุขภาพตามหลักการแพทย์แผนจีน
+                </p>
+                
+                <p style="margin: 2mm 0 6mm 0; text-align: justify; text-indent: 12mm;">
+                    ออกใบรับรองนี้ไว้เพื่อเป็นหลักฐานตามความประสงค์
+                </p>
+            </div>
+            
+            <!-- ลายเซ็น -->
+            <div style="margin-top: 8mm;">
+                <div style="text-align: center;">
+                    <p style="margin: 6mm 0 2mm 0;">
+                        ลงชื่อ...............................................................
+                    </p>
+                    <p style="margin: 0; font-size: 9pt;">
+                        (แพทย์แผนจีน ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย)
+                    </p>
+                    <p style="margin: 2mm 0 0 0; font-size: 9pt;">
+                        วันที่ ${formattedDate}
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="margin-top: 4mm; padding-top: 2mm; border-top: 0.3pt solid #ccc; font-size: 8pt; text-align: center; color: #666; position: absolute; bottom: 5mm; left: 8mm; right: 8mm;">
+                <p style="margin: 0.5mm 0;">${clinicInfo.addressThai || ''}</p>
+                <p style="margin: 0.5mm 0;">${clinicInfo.phone || ''} | ${clinicInfo.license || ''}</p>
+                <p style="margin: 0.5mm 0; font-style: italic;">ใบรับรองแพทย์ฉบับนี้ใช้เพื่อวัตถุประสงค์ทางการแพทย์เท่านั้น</p>
+            </div>
+        </div>
+    `;
+}
         // สร้างเนื้อหาใบรับรองแพทย์จากข้อมูลที่บันทึก
-        function generateMedicalCertContentFromRecord(record) {
-            const today = new Date();
-            const formattedDate = today.toLocaleDateString('th-TH', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+function generateMedicalCertContentFromRecord(record) {
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('th-TH', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    const visitDate = record.visitDate ? 
+        new Date(record.visitDate).toLocaleDateString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }) : formattedDate;
+    
+    return `
+        <div style="font-family: 'TH Sarabun New', 'Sarabun', sans-serif; padding: 8mm 10mm; line-height: 1.3; color: #000000; font-size: 14pt; min-height: 297mm; box-sizing: border-box;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 6mm; padding-bottom: 2mm; border-bottom: 1pt solid #000;">
+                <h1 style="margin: 0 0 1mm 0; font-size: 20pt; font-weight: bold; color: #000;">ใบรับรองแพทย์</h1>
+                <h2 style="margin: 0; font-size: 16pt; font-weight: bold;">${clinicInfo.name || 'ซินไท คลินิกแพทย์แผนจีน'}</h2>
+                <p style="margin: 1mm 0 0 0; font-size: 11pt;">
+                    ${clinicInfo.addressThai || '644/3 หมู่ 10 ตำบลโคกกรวด อำเภอเมือง จังหวัดนครราชสีมา 30280'}<br>
+                    ${clinicInfo.phone || 'โทรศัพท์: 080-662-4224'} | ${clinicInfo.license || 'ใบอนุญาตสถานพยาบาลเลขที่ 30109000365'}
+                </p>
+            </div>
             
-            const visitDate = record.visitDate ? 
-                new Date(record.visitDate).toLocaleDateString('th-TH', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                }) : formattedDate;
+            <!-- เนื้อหาใบรับรอง -->
+            <div style="margin: 5mm 0;">
+                <p style="margin: 4mm 0; text-align: justify; text-indent: 15mm;">
+                    ข้าพเจ้า <strong>แพทย์แผนจีน พจ.979 ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย</strong> 
+                    แพทย์ประจำคลินิกการแพทย์แผนจีนซินไท
+                    ขอรับรองว่า
+                </p>
+                
+                <div style="margin: 4mm 0 6mm 0; padding-left: 20mm;">
+                    <p style="margin: 2mm 0; padding: 0.5mm 0;">
+                        <strong>ชื่อ-สกุล:</strong> ${record.name || '....................................................'}
+                    </p>
+                    <p style="margin: 2mm 0; padding: 0.5mm 0;">
+                        <strong>อายุ:</strong> ${record.age || '........'} ปี &nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>เพศ:</strong> ${record.gender || '........'}
+                    </p>
+                    <p style="margin: 2mm 0; padding: 0.5mm 0;">
+                        <strong>วันที่เข้ารับการตรวจ:</strong> ${visitDate}
+                    </p>
+                    ${record.hn ? `
+                    <p style="margin: 2mm 0; padding: 0.5mm 0;">
+                        <strong>เลขประจำตัวผู้ป่วย (HN):</strong> ${record.hn}
+                    </p>
+                    ` : ''}
+                </div>
+                
+                <p style="margin: 4mm 0; text-align: justify; text-indent: 15mm;">
+                    ได้รับการตรวจวินิจฉัยและให้การรักษาด้วยศาสตร์การแพทย์แผนจีน
+                    ${record.tcmDiag ? `โดยมีภาวะ <strong>"${record.tcmDiag}"</strong> ตามหลักการแพทย์แผนจีน` : ''}
+                    ${record.westDiag ? `(วินิจฉัยทางการแพทย์สากล: ${record.westDiag})` : ''}
+                </p>
+                
+                <div style="margin: 5mm 0; padding: 3mm; background-color: #f9f9f9; border-left: 3px solid #6c5ce7; border-radius: 1px;">
+                    <p style="margin: 1mm 0 2mm 0; font-weight: bold; font-size: 13pt;">การรักษาที่ได้รับ:</p>
+                    <p style="margin: 1mm 0; padding-left: 10mm; font-size: 13pt;">${record.plan || 'การรักษาตามแผนการแพทย์แผนจีนตามสภาพอาการของผู้ป่วย'}</p>
+                    ${record.herbRecommendation ? `
+                    <p style="margin: 1mm 0; padding-left: 10mm; font-size: 13pt;">
+                        <strong>คำแนะนำเรื่องยาสมุนไพร:</strong> ${record.herbRecommendation}
+                    </p>
+                    ` : ''}
+                    ${record.treatmentDays ? `
+                    <p style="margin: 1mm 0; padding-left: 10mm; font-size: 13pt;">
+                        <strong>ระยะเวลาในการรักษาที่แนะนำ:</strong> ${record.treatmentDays} วัน
+                    </p>
+                    ` : ''}
+                </div>
+                
+                <p style="margin: 4mm 0 8mm 0; text-align: justify; text-indent: 15mm;">
+                    จึงได้ออกใบรับรองแพทย์นี้ไว้เพื่อเป็นหลักฐานแก่ผู้ป่วยตามความประสงค์
+                </p>
+            </div>
             
-            return `
-                <div style="font-family: 'TH Sarabun New', 'Sarabun', sans-serif; padding: 15mm; line-height: 1.5; color: #000000; font-size: 16pt;">
-                    <!-- Header -->
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <h1 style="margin: 0; font-size: 28pt; font-weight: bold; color: #000;">ใบรับรองแพทย์</h1>
-                        <h2 style="margin: 10px 0; font-size: 22pt; font-weight: bold;">ซินไท คลินิกแพทย์แผนจีน</h2>
-                        <p style="margin: 5px 0; font-size: 14pt;">
-                            644/3 หมู่ 10 ตำบลโคกกรวด อำเภอเมือง จังหวัดนครราชสีมา 30280<br>
-                            โทรศัพท์: 080-662-4224 | ใบอนุญาตสถานพยาบาลเลขที่ 30109000365
-                        </p>
-                    </div>
-                    
-                    <!-- เนื้อหาใบรับรอง -->
-                    <div style="margin: 30px 0; text-align: justify;">
-                        <p style="margin: 20px 0;">
-                            ข้าพเจ้า <strong>แพทย์แผนจีน พจ.979 ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย</strong> 
-                            แพทย์ประจำคลินิกการแพทย์แผนจีนซินไท
-                            ขอรับรองว่า
-                        </p>
-                        
-                        <div style="margin: 25px 0; padding-left: 40px;">
-                            <p style="margin: 15px 0;">
-                                <strong>ชื่อ-สกุล:</strong> ${record.name || '...................................'}
-                            </p>
-                            <p style="margin: 15px 0;">
-                                <strong>อายุ:</strong> ${record.age || '........'} ปี &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <strong>เพศ:</strong> ${record.gender || '........'}
-                            </p>
-                            <p style="margin: 15px 0;">
-                                <strong>วันที่เข้ารับการตรวจ:</strong> ${visitDate}
-                            </p>
-                            <p style="margin: 15px 0;">
-                                <strong>เลขประจำตัวผู้ป่วย (HN):</strong> ${record.hn || 'ไม่ระบุ'}
-                            </p>
-                        </div>
-                        
-                        <p style="margin: 20px 0;">
-                            ได้รับการตรวจวินิจฉัยและให้การรักษาด้วยศาสตร์การแพทย์แผนจีน
-                            ${record.tcmDiag ? `โดยมีภาวะ <strong>"${record.tcmDiag}"</strong> ตามหลักการแพทย์แผนจีน` : ''}
-                            ${record.westDiag ? `(วินิจฉัยทางการแพทย์สากล: ${record.westDiag})` : ''}
-                        </p>
-                        
-                        <div style="margin: 25px 0; padding: 15px; background-color: #f9f9f9; border-left: 5px solid #6c5ce7;">
-                            <p style="margin: 10px 0; font-weight: bold;">การรักษาที่ได้รับ:</p>
-                            <p style="margin: 10px 0; padding-left: 20px;">${record.plan || 'การรักษาตามแผนการแพทย์แผนจีนตามสภาพอาการของผู้ป่วย'}</p>
-                            ${record.herbRecommendation ? `<p style="margin: 10px 0; padding-left: 20px;">คำแนะนำเรื่องยาสมุนไพร: ${record.herbRecommendation}</p>` : ''}
-                            ${record.treatmentDays ? `<p style="margin: 10px 0; padding-left: 20px;">ระยะเวลาในการรักษาที่แนะนำ: ${record.treatmentDays} วัน</p>` : ''}
-                        </div>
-                        
-                        <p style="margin: 20px 0;">
-                            จึงได้ออกใบรับรองแพทย์นี้ไว้เพื่อเป็นหลักฐานแก่ผู้ป่วยตามความประสงค์
-                        </p>
-                    </div>
-                    
-                    <!-- ลายเซ็น -->
-                    <div style="margin-top: 60px;">
-                        <div style="text-align: center;">
-                            <div style="display: inline-block; text-align: center; margin: 0 40px;">
-                                <p style="margin: 50px 0 10px 0;">ลงชื่อ.............................................................</p>
-                                <p style="margin: 5px 0; font-weight: bold;">(แพทย์แผนจีน พจ.979 ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย)</p>
-                                <p style="margin: 5px 0;">แพทย์ประจำ ซินไท คลินิกการแพทย์แผนจีน</p>
-                                <p style="margin: 5px 0;">วันที่ ${formattedDate}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- ตราประทับ (จำลอง) -->
-                    <div style="position: absolute; right: 30mm; bottom: 30mm; text-align: center;">
-                        <div style="width: 60mm; height: 60mm; border: 2px solid red; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                            <div style="text-align: center;">
-                                <div style="font-weight: bold; font-size: 12pt;">ตราประทับ</div>
-                                <div style="font-size: 10pt;">คลินิกการแพทย์แผนจีน</div>
-                                <div style="font-size: 10pt;">ซินไท</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Footer -->
-                    <div style="margin-top: 80px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 12pt; color: #666; text-align: center;">
-                        <p style="margin: 5px 0;">644/3 หมู่ 10 ตำบลโคกกรวด อำเภอเมือง จังหวัดนครราชสีมา 30280 | โทร. 080-662-4224</p>
-                        <p style="margin: 5px 0;">ใบรับรองแพทย์ฉบับนี้ใช้เพื่อวัตถุประสงค์ทางการแพทย์เท่านั้น</p>
+            <!-- ลายเซ็น -->
+            <div style="margin-top: 15mm;">
+                <div style="text-align: center;">
+                    <div style="display: inline-block; text-align: center;">
+                        <p style="margin: 12mm 0 3mm 0;">ลงชื่อ.............................................................</p>
+                        <p style="margin: 0; font-weight: bold; font-size: 13pt;">(แพทย์แผนจีน พจ.979 ณรงค์ศักดิ์ รุ่งเรืองสกุลไชย)</p>
+                        <p style="margin: 1mm 0; font-size: 12pt;">แพทย์ประจำคลินิกการแพทย์แผนจีนซินไท</p>
+                        <p style="margin: 1mm 0; font-size: 12pt;">วันที่ ${formattedDate}</p>
                     </div>
                 </div>
-            `;
-        }
+            </div>
+            
+            <!-- Footer (ลบตราประทับออก) -->
+            <div style="margin-top: 10mm; padding-top: 3mm; border-top: 0.5px solid #ccc; font-size: 10pt; color: #666; text-align: center;">
+                <p style="margin: 1mm 0;">${clinicInfo.addressThai || '644/3 หมู่ 10 ตำบลโคกกรวด อำเภอเมือง จังหวัดนครราชสีมา 30280'}</p>
+                <p style="margin: 1mm 0;">${clinicInfo.phone || 'โทร. 080-662-4224'} | ${clinicInfo.license || 'ใบอนุญาตสถานพยาบาลเลขที่ 30109000365'}</p>
+                <p style="margin: 1mm 0; font-style: italic;">ใบรับรองแพทย์ฉบับนี้ใช้เพื่อวัตถุประสงค์ทางการแพทย์เท่านั้น</p>
+            </div>
+        </div>
+    `;
+}
 
         function exportOPDToPDF() {
             const patientName = document.getElementById('pname').value.trim();
